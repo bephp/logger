@@ -1,5 +1,5 @@
 # logger
-A terrible logger utility for PHP (syntax same as noodlehaus/logger)
+A terrible logger utility for PHP (syntax same as [noodlehaus/logger](https://github.com/noodlehaus/logger))
 
 ## Example
 
