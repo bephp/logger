@@ -9,15 +9,15 @@ function logger($path, $cond = true) {
 
     register_shutdown_function(function() use ($path, &$logs){
 
-        $fd = fopen($path, 'a+');
+        $fd = @fopen($path, 'a+');
 
         foreach($logs as $log)
             if ($msg = count($log) > 1 
                 ? call_user_func_array('sprintf', $log)
                 : array_shift($log))
-                fwrite($fd, $msg."\n");
+                @fwrite($fd, $msg."\n");
 
-        fclose($fd);
+        @fclose($fd);
 
     });
 
