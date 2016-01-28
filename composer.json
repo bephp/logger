@@ -1,0 +1,21 @@
+{
+  "name": "bephp/logger",
+  "type": "library",
+  "description": "simple logging",
+  "keywords": ["logging", "logs", "logfile", "micro", "microphp"],
+  "homepage": "https://github.com/bephp/logger",
+  "license": "MIT",
+  "authors": [{
+    "name": "lloydzhou@qq.com",
+    "role": "Developer",
+    "homepage": "http://github.com/bephp"
+  }],
+  "require": {
+    "php": ">= 5.3.0"
+  },
+  "autoload": {
+    "files": [
+      "logger.php"
+    ]
+  }
+}
