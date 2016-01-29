@@ -9,11 +9,11 @@ function logger($path = 'php.log', $cond = true) {
 
     register_shutdown_function(function() use ($path, &$logs){
 
-        @file_put_contents($path, implode(array_map(function($log){
+        return count($logs) > 0 ? @file_put_contents($path, implode(array_map(function($log){
 
             return count($log) > 1 ? call_user_func_array('sprintf', $log) : current($log);
 
-        }, $logs), PHP_EOL). PHP_EOL, FILE_APPEND | LOCK_EX);
+        }, $logs), PHP_EOL). PHP_EOL, FILE_APPEND | LOCK_EX) : false;
 
     });
 
