@@ -11,7 +11,7 @@ function logger($path = 'php.log', $cond = true) {
 
         @file_put_contents($path, implode(array_map(function($log){
 
-            return count($log) > 1 ? call_user_func_array('sprintf', $log) : array_shift($log);
+            return count($log) > 1 ? call_user_func_array('sprintf', $log) : reset($log);
 
         }, $logs), PHP_EOL). PHP_EOL, FILE_APPEND | LOCK_EX);
 
