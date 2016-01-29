@@ -3,27 +3,26 @@
  * @lloydzhou https://github.com/bephp/logger
  */
 
-function logger($path, $cond = true) {
+function logger($path = 'php.log', $cond = true) {
 
     $logs = array();
 
     register_shutdown_function(function() use ($path, &$logs){
 
-        $fd = @fopen($path, 'a+');
+        @file_put_contents($path, implode(array_map(function($log){
 
-        foreach($logs as $log)
-            if ($msg = count($log) > 1 
-                ? call_user_func_array('sprintf', $log)
-                : array_shift($log))
-                @fwrite($fd, $msg."\n");
+            return count($log) > 1 ? call_user_func_array('sprintf', $log) : array_shift($log);
 
-        @fclose($fd);
+        }, $logs), PHP_EOL). PHP_EOL, FILE_APPEND | LOCK_EX);
 
     });
 
     $cond = is_callable($cond) ? call_user_func($cond) : !!($cond);
 
     return function () use ($cond, &$logs) {
-        return $cond ? $logs[] = func_get_args() : false;
+
+        return $cond && func_num_args() > 0 ? $logs[] = func_get_args() : false;
+
     };
 }
+
